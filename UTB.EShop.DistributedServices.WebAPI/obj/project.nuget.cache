@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vqSntjCUEHlRj56MoX/Xy0Sun+i4rFrN58SKyriMjUcB0BW4HqDtJQsfk2tX8SOA2qXb2IH96nQ8vpeCiJlHlA==",
+  "dgSpecHash": "86gw8IG4B5DLg0hV5t05HU+Ydwpw1sOzWW/cyDndO+Z3yGo1HbbU+dt7LinLW62sfUn25vhiJtp2OGmWRZ9I8Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\UTB.EShop.DistributedServices.WebApi\\UTB.EShop.DistributedServices.WebApi.csproj",
+  "projectFilePath": "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\UTB.EShop.DistributedServices.WebAPI\\UTB.EShop.DistributedServices.WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\m_ols\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\m_ols\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",

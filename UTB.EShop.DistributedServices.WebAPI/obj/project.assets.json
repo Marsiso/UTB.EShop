@@ -230,11 +230,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\UTB.EShop.DistributedServices.WebApi\\UTB.EShop.DistributedServices.WebApi.csproj",
-      "projectName": "UTB.EShop.DistributedServices.WebApi",
-      "projectPath": "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\UTB.EShop.DistributedServices.WebApi\\UTB.EShop.DistributedServices.WebApi.csproj",
+      "projectUniqueName": "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\UTB.EShop.DistributedServices.WebAPI\\UTB.EShop.DistributedServices.WebAPI.csproj",
+      "projectName": "UTB.EShop.DistributedServices.WebAPI",
+      "projectPath": "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\UTB.EShop.DistributedServices.WebAPI\\UTB.EShop.DistributedServices.WebAPI.csproj",
       "packagesPath": "C:\\Users\\m_ols\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\UTB.EShop.DistributedServices.WebApi\\obj\\",
+      "outputPath": "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\UTB.EShop.DistributedServices.WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTB.EShop.Presentation.WebUI", "UTB.EShop.Presentation.WebUI\UTB.EShop.Presentation.WebUI.csproj", "{873B6F96-3B63-4BFF-BB04-CB64FBDBA217}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTB.EShop.DistributedServices.WebApi", "UTB.EShop.DistributedServices.WebApi\UTB.EShop.DistributedServices.WebApi.csproj", "{D3560F25-BEBC-400A-B00E-A5A8ECAB9F52}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTB.EShop.DistributedServices.WebAPI", "UTB.EShop.DistributedServices.WebAPI\UTB.EShop.DistributedServices.WebAPI.csproj", "{D3560F25-BEBC-400A-B00E-A5A8ECAB9F52}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
