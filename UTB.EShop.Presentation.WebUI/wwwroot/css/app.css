@@ -2,20 +2,6 @@
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-.parallax {
-    /* The image used */
-    background-image: url("");
-
-    /* Full height */
-    height: 100%;
-
-    /* Create the parallax scrolling effect */
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
 h1, h2, h3, h4, h5, h6 {
     outline: none;
 }

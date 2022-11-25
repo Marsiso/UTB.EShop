@@ -1,50 +1,49 @@
 ﻿@inherits LayoutComponentBase
 
 <!-- Navbar Top Image -->
-<img src="img/navbar-top.webp" class="object-fit-cover cover-image" alt="navbar top image">
+<img src="img/navbar-top.jpg" class="object-fit-cover cover-image" alt="navbar top image">
 <!-- Navbar Top Image -->
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Navigation bar">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        UTB
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-5" aria-label="Navigation bar">
+  <div class="container-fluid justify-content-center">
+    <a class="navbar-brand" href="#">
+      UTB
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="collapse navbar-collapse" id="navbarsExample05">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Carousel</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Products</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown-management" data-bs-toggle="dropdown" aria-expanded="false">Managment</a>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbar-dropdown-management">
-              <li><h6 class="dropdown-header">Carousel</h6></li>
-              <li><a class="dropdown-item" href="#">Select</a></li>
-              <li><a class="dropdown-item" href="#">Create</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><h6 class="dropdown-header">Products</h6></li>
-              <li><a class="dropdown-item" href="#">Select</a></li>
-              <li><a class="dropdown-item" href="#">Create</a></li>
-            </ul>
-          </li>
-        </ul>
-        <form>
-          <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-        </form>
-      </div>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Carousel</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#" tabindex="-1" aria-disabled="true">Products</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" href="#" id="navbar-dropdown-management" data-bs-toggle="dropdown" aria-expanded="false">Managment</a>
+          <ul class="dropdown-menu" aria-labelledby="navbar-dropdown-management">
+            <li><h6 class="dropdown-header">Carousel</h6></li>
+            <li><a class="dropdown-item" href="#">Select</a></li>
+            <li><a class="dropdown-item" href="#">Create</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><h6 class="dropdown-header">Products</h6></li>
+            <li><a class="dropdown-item" href="#">Select</a></li>
+            <li><a class="dropdown-item" href="#">Create</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 <!-- Navbar -->
+
+
 
 <!-- Body -->
 <div class="container">
