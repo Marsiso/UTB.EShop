@@ -1,4 +1,5 @@
 ﻿@page "/Carousel"
+@using System.Reflection.Metadata.Ecma335
 
 <PageTitle>Carousel</PageTitle>
 
@@ -7,13 +8,15 @@
     <h1 class="fst-italic">Carousel Image Collection ...</h1>
     <h2 class="fst-italic mb-5">Browse carousel images ... </h2>
     
-    <table class="table table-hover table-bordered">
+    <table class="table table-hover table-bordered align-middle">
         <thead>
         <tr>
             <th scope="col">#</th>
             <th scope="col">First</th>
             <th scope="col">Last</th>
             <th scope="col">Handle</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -22,22 +25,43 @@
             <td>Mark</td>
             <td>Otto</td>
             <td>example 1</td>
+            <th scope="col"><button class="btn btn-link btn-outline-none fw-bold" @onclick="() => Delete()">Edit</button></th>
+            <th scope="col"><button class="btn btn-link btn-outline-none fw-bold" @onclick="() => Delete()">Delete</button></th>
         </tr>
         <tr>
             <th scope="row">2</th>
             <td>Jacob</td>
             <td>Thornton</td>
             <td>example 2</td>
+            <th scope="col"><button class="btn btn-link btn-outline-none fw-bold" @onclick="() => Delete()">Edit</button></th>
+            <th scope="col"><button class="btn btn-link btn-outline-none fw-bold" @onclick="() => Delete()">Delete</button></th>
         </tr>
         <tr>
             <th scope="row">3</th>
-            <td>Larry the Bird</td>
+            <td>Larry</td>
+            <td>the Bird</td>
             <td>example 3</td>
+            <th scope="col"><button class="btn btn-link btn-outline-none fw-bold" @onclick="() => Delete()">Edit</button></th>
+            <th scope="col"><button class="btn btn-link btn-outline-none fw-bold" @onclick="() => Delete()">Delete</button></th>
         </tr>
         </tbody>
     </table>
 }
 
+<style>
+    .btn-outline-none:focus, .btn-outline-none:active {
+        outline: none !important;
+        box-shadow: none;
+    }
+</style>
+
 
 @code {
+    void Edit()
+    {
+    }
+
+    void Delete()
+    {
+    }
 }
