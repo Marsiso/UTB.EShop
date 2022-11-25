@@ -1,21 +1,68 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <main>
-        <article class="px-4">
-            @Body
-        </article>
-    </main>
+<!-- Navbar Top Image -->
+<img src="img/navbar-top.webp" class="object-fit-cover cover-image" alt="navbar top image">
+<!-- Navbar Top Image -->
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Navigation bar">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        UTB
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExample05">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Carousel</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Products</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown-management" data-bs-toggle="dropdown" aria-expanded="false">Managment</a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbar-dropdown-management">
+              <li><h6 class="dropdown-header">Carousel</h6></li>
+              <li><a class="dropdown-item" href="#">Select</a></li>
+              <li><a class="dropdown-item" href="#">Create</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><h6 class="dropdown-header">Products</h6></li>
+              <li><a class="dropdown-item" href="#">Select</a></li>
+              <li><a class="dropdown-item" href="#">Create</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form>
+          <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+        </form>
+      </div>
+    </div>
+  </nav>
+<!-- Navbar -->
+
+<!-- Body -->
+<div class="container">
+  <main>
+    @Body
+  </main>
 </div>
+<!-- Body -->
 
 <style>
-    .page {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    main {
-        flex: 1;
-    }
+  .object-fit-cover {
+      object-fit: cover;
+  }
+  
+  .cover-image {
+      width: 100%;
+      height: calc(100vw / 5.8 - 1px);
+      min-height: 103px;
+  }
 </style>
+
