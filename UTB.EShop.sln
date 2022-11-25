@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTB.EShop.Presentation.WebUI", "UTB.EShop.Presentation.WebUI\UTB.EShop.Presentation.WebUI.csproj", "{873B6F96-3B63-4BFF-BB04-CB64FBDBA217}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTB.EShop.DistributedServices.WebApi", "UTB.EShop.DistributedServices.WebApi\UTB.EShop.DistributedServices.WebApi.csproj", "{D3560F25-BEBC-400A-B00E-A5A8ECAB9F52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{873B6F96-3B63-4BFF-BB04-CB64FBDBA217}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{873B6F96-3B63-4BFF-BB04-CB64FBDBA217}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{873B6F96-3B63-4BFF-BB04-CB64FBDBA217}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3560F25-BEBC-400A-B00E-A5A8ECAB9F52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3560F25-BEBC-400A-B00E-A5A8ECAB9F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3560F25-BEBC-400A-B00E-A5A8ECAB9F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3560F25-BEBC-400A-B00E-A5A8ECAB9F52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
