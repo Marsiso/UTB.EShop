@@ -88,6 +88,16 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "UTB.EShop.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/UTB.EShop.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/UTB.EShop.Infrastructure.dll": {}
+        }
       }
     }
   },
@@ -216,11 +226,17 @@
         "swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "UTB.EShop.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../UTB.EShop.Infrastructure/UTB.EShop.Infrastructure.csproj",
+      "msbuildProject": "../UTB.EShop.Infrastructure/UTB.EShop.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "Swashbuckle.AspNetCore >= 6.2.3"
+      "Swashbuckle.AspNetCore >= 6.2.3",
+      "UTB.EShop.Infrastructure >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -254,7 +270,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\UTB.EShop.Infrastructure\\UTB.EShop.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\UTB.EShop.Infrastructure\\UTB.EShop.Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

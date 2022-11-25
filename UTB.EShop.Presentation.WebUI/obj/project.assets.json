@@ -498,6 +498,16 @@
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
         }
+      },
+      "UTB.EShop.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/UTB.EShop.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/UTB.EShop.Infrastructure.dll": {}
+        }
       }
     },
     "net6.0/browser-wasm": {
@@ -990,6 +1000,16 @@
         },
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
+        }
+      },
+      "UTB.EShop.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/UTB.EShop.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/UTB.EShop.Infrastructure.dll": {}
         }
       }
     }
@@ -1753,12 +1773,18 @@
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "UTB.EShop.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../UTB.EShop.Infrastructure/UTB.EShop.Infrastructure.csproj",
+      "msbuildProject": "../UTB.EShop.Infrastructure/UTB.EShop.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "Microsoft.AspNetCore.Components.WebAssembly >= 6.0.8",
-      "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 6.0.8"
+      "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 6.0.8",
+      "UTB.EShop.Infrastructure >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1792,7 +1818,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\UTB.EShop.Infrastructure\\UTB.EShop.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\UTB.EShop.Infrastructure\\UTB.EShop.Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

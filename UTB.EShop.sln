@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTB.EShop.Presentation.WebU
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTB.EShop.DistributedServices.WebAPI", "UTB.EShop.DistributedServices.WebAPI\UTB.EShop.DistributedServices.WebAPI.csproj", "{D3560F25-BEBC-400A-B00E-A5A8ECAB9F52}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTB.EShop.Infrastructure", "UTB.EShop.Infrastructure\UTB.EShop.Infrastructure.csproj", "{A2147A18-A466-436A-97F9-092F0ECD1966}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{D3560F25-BEBC-400A-B00E-A5A8ECAB9F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3560F25-BEBC-400A-B00E-A5A8ECAB9F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3560F25-BEBC-400A-B00E-A5A8ECAB9F52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2147A18-A466-436A-97F9-092F0ECD1966}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2147A18-A466-436A-97F9-092F0ECD1966}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2147A18-A466-436A-97F9-092F0ECD1966}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2147A18-A466-436A-97F9-092F0ECD1966}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
