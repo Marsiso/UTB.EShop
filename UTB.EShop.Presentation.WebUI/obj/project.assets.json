@@ -499,9 +499,22 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
+      "AP5PW.EShop.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/AP5PW.EShop.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AP5PW.EShop.Application.dll": {}
+        }
+      },
       "UTB.EShop.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "AP5PW.EShop.Application": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/UTB.EShop.Infrastructure.dll": {}
         },
@@ -1002,9 +1015,22 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
+      "AP5PW.EShop.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/AP5PW.EShop.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AP5PW.EShop.Application.dll": {}
+        }
+      },
       "UTB.EShop.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "AP5PW.EShop.Application": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/UTB.EShop.Infrastructure.dll": {}
         },
@@ -1773,6 +1799,11 @@
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "AP5PW.EShop.Application/1.0.0": {
+      "type": "project",
+      "path": "../AP5PW.EShop.Application/AP5PW.EShop.Application.csproj",
+      "msbuildProject": "../AP5PW.EShop.Application/AP5PW.EShop.Application.csproj"
     },
     "UTB.EShop.Infrastructure/1.0.0": {
       "type": "project",

@@ -6,8 +6,4 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\AP5PW.EShop.Application\AP5PW.EShop.Application.csproj" />
-    </ItemGroup>
-
 </Project>

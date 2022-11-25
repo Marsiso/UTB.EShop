@@ -89,9 +89,22 @@
           "Microsoft.AspNetCore.App"
         ]
       },
+      "AP5PW.EShop.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/AP5PW.EShop.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AP5PW.EShop.Application.dll": {}
+        }
+      },
       "UTB.EShop.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "AP5PW.EShop.Application": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/UTB.EShop.Infrastructure.dll": {}
         },
@@ -226,6 +239,11 @@
         "swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "AP5PW.EShop.Application/1.0.0": {
+      "type": "project",
+      "path": "../AP5PW.EShop.Application/AP5PW.EShop.Application.csproj",
+      "msbuildProject": "../AP5PW.EShop.Application/AP5PW.EShop.Application.csproj"
     },
     "UTB.EShop.Infrastructure/1.0.0": {
       "type": "project",

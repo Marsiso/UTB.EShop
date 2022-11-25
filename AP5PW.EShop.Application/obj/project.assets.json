@@ -1,30 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {
-      "AP5PW.EShop.Application/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "compile": {
-          "bin/placeholder/AP5PW.EShop.Application.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/AP5PW.EShop.Application.dll": {}
-        }
-      }
-    }
+    "net6.0": {}
   },
-  "libraries": {
-    "AP5PW.EShop.Application/1.0.0": {
-      "type": "project",
-      "path": "../AP5PW.EShop.Application/AP5PW.EShop.Application.csproj",
-      "msbuildProject": "../AP5PW.EShop.Application/AP5PW.EShop.Application.csproj"
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    "net6.0": [
-      "AP5PW.EShop.Application >= 1.0.0"
-    ]
+    "net6.0": []
   },
   "packageFolders": {
     "C:\\Users\\m_ols\\.nuget\\packages\\": {},
@@ -33,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\UTB.EShop.Infrastructure\\UTB.EShop.Infrastructure.csproj",
-      "projectName": "UTB.EShop.Infrastructure",
-      "projectPath": "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\UTB.EShop.Infrastructure\\UTB.EShop.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\AP5PW.EShop.Application\\AP5PW.EShop.Application.csproj",
+      "projectName": "AP5PW.EShop.Application",
+      "projectPath": "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\AP5PW.EShop.Application\\AP5PW.EShop.Application.csproj",
       "packagesPath": "C:\\Users\\m_ols\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\UTB.EShop.Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\AP5PW.EShop.Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -57,11 +38,7 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {
-            "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\AP5PW.EShop.Application\\AP5PW.EShop.Application.csproj": {
-              "projectPath": "C:\\Users\\m_ols\\RiderProjects\\UTB.EShop\\AP5PW.EShop.Application\\AP5PW.EShop.Application.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
