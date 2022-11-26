@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTB.EShop.DistributedServic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTB.EShop.Infrastructure", "UTB.EShop.Infrastructure\UTB.EShop.Infrastructure.csproj", "{A2147A18-A466-436A-97F9-092F0ECD1966}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AP5PW.EShop.Application", "AP5PW.EShop.Application\AP5PW.EShop.Application.csproj", "{D5904960-E58B-4260-9D25-8BBAFB05399D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTB.EShop.Application", "UTB.EShop.Application\UTB.EShop.Application.csproj", "{D5904960-E58B-4260-9D25-8BBAFB05399D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
