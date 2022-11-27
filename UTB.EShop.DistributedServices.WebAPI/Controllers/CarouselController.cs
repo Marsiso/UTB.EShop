@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using UTB.EShop.Application.DataTransferObjects.Carousel;
 using UTB.EShop.Application.Interfaces.Repositories;
+using UTB.EShop.Application.Paging;
 using UTB.EShop.DistributedServices.WebAPI.Attributes;
 using UTB.EShop.Infrastructure.Entities;
+using UTB.EShop.Infrastructure.Models.Paging;
 using ILogger = Serilog.ILogger;
 
 namespace UTB.EShop.DistributedServices.WebAPI.Controllers;
@@ -15,9 +18,9 @@ public class CarouselController : ControllerBase
 {
     private readonly IMapper _mapper;
     private readonly ILogger _logger;
-    private readonly IRepository<CarouselItemEntity> _repository;
+    private readonly IRepository<CarouselItemEntity, CarouselItemParameters> _repository;
 
-    public CarouselController(IMapper mapper, ILogger logger, IRepository<CarouselItemEntity> repository)
+    public CarouselController(IMapper mapper, ILogger logger, IRepository<CarouselItemEntity, CarouselItemParameters> repository)
     {
         _mapper = mapper;
         _logger = logger;
@@ -27,9 +30,17 @@ public class CarouselController : ControllerBase
     [HttpGet(Name = "GetAll")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult<IEnumerable<CarouselItemDto>>> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] CarouselItemParameters carouselItemParameters)
     {
-        var carouselItems = await _repository.GetAllEntitiesAsync();
+        var carouselItems = await _repository.GetAllEntitiesAsync(carouselItemParameters);
+        if (carouselItems is null)
+        {
+            _logger.Warning("Carousel item objects haven't been found.");
+            return NotFound();
+        }
+        
+        Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(carouselItems.MetaData));
+        
         var carouselItemsDto = _mapper.Map<IEnumerable<CarouselItemDto>>(carouselItems);
         
         return Ok(carouselItemsDto);

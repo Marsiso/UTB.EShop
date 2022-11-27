@@ -2,16 +2,17 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using UTB.EShop.Application.Interfaces.Repositories;
 using UTB.EShop.Infrastructure.Entities;
+using UTB.EShop.Infrastructure.Models.Paging;
 using ILogger = Serilog.ILogger;
 
 namespace UTB.EShop.DistributedServices.WebAPI.Attributes;
 
 public class ValidateCarouselItemExistsAttribute : IAsyncActionFilter
 {
-    private readonly IRepository<CarouselItemEntity> _repository;
+    private readonly IRepository<CarouselItemEntity, CarouselItemParameters> _repository;
     private readonly ILogger _logger;
 
-    public ValidateCarouselItemExistsAttribute(IRepository<CarouselItemEntity> repository, ILogger logger)
+    public ValidateCarouselItemExistsAttribute(IRepository<CarouselItemEntity, CarouselItemParameters> repository, ILogger logger)
     {
         _repository = repository;
         _logger = logger;
@@ -22,6 +23,7 @@ public class ValidateCarouselItemExistsAttribute : IAsyncActionFilter
         var method = context.HttpContext.Request.Method;
         var trackChanges = method.Equals("PUT") || method.Equals("PATCH");
         var id = (int)context.ActionArguments["id"]!;
+        
         var carouselItemEntity = await _repository.GetEntityAsync(id, trackChanges);
         if (carouselItemEntity == null)
         {

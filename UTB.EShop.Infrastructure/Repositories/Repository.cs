@@ -1,24 +1,28 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UTB.EShop.Application.Interfaces.Entities;
 using UTB.EShop.Application.Interfaces.Repositories;
+using UTB.EShop.Application.Paging;
 using UTB.EShop.Infrastructure.DbContexts;
 
 namespace UTB.EShop.Infrastructure.Repositories;
 
-public sealed class Repository<TEntity> : 
-    RepositoryBase<TEntity>, 
-    IRepository<TEntity> 
+public sealed class Repository<TEntity, TEntityParameters> : RepositoryBase<TEntity>, IRepository<TEntity, TEntityParameters> 
     where TEntity : class, IDataEntity
+    where TEntityParameters : RequestParameters
 {
     public Repository(RepositoryContext repositoryContext) 
         : base(repositoryContext)
     {
     }
     
-    public async Task<IEnumerable<TEntity>> GetAllEntitiesAsync(bool trackChanges = false) => 
-        await FindAll(trackChanges)
+    public async Task<PagedList<TEntity>?> GetAllEntitiesAsync(TEntityParameters entityParameters, bool trackChanges = false)
+    {
+        var entities =  await FindAll(trackChanges)
             .OrderBy(entity => entity.Id)
             .ToListAsync();
+
+        return PagedList<TEntity>.ToPagedList(entities, entityParameters.PageNumber, entityParameters.PageSize);
+    }
 
     public async Task<TEntity?> GetEntityAsync(int id, bool trackChanges  = false) => 
         await FindByCondition(expression: entity => entity.Id.Equals(id), trackChanges)

@@ -6,12 +6,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using UTB.EShop.Application.Interfaces.Repositories;
+using UTB.EShop.Application.Paging;
 using UTB.EShop.DistributedServices.WebAPI.Attributes;
 using UTB.EShop.Infrastructure.Entities;
 using UTB.EShop.Infrastructure.Repositories;
 using UTB.EShop.DistributedServices.WebAPI.Extensions;
 using UTB.EShop.Infrastructure.DbContexts;
 using UTB.EShop.Infrastructure.Mappings;
+using UTB.EShop.Infrastructure.Models.Paging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,8 +41,8 @@ builder.Logging
 
 builder.Services
     .AddSqlServer<RepositoryContext>(builder.Configuration.GetConnectionString("Mssql"), opt => opt.MigrationsAssembly(typeof(Program).Assembly.FullName))
-    .AddScoped<IRepository<CarouselItemEntity>, Repository<CarouselItemEntity>>()
-    .AddScoped<IRepository<ImageFileEntity>, Repository<ImageFileEntity>>()
+    .AddScoped<IRepository<CarouselItemEntity, CarouselItemParameters>, Repository<CarouselItemEntity, CarouselItemParameters>>()
+    .AddScoped<IRepository<ImageFileEntity, RequestParameters>, Repository<ImageFileEntity, RequestParameters>>()
     .AddAutoMapper(typeof(CarouselItemProfile), typeof(ImageFileProfile))
     .AddScoped<ValidationFilterAttribute>()
     .AddScoped<ValidateCarouselItemExistsAttribute>()

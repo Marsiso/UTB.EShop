@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using UTB.EShop.Application.Interfaces.Entities;
 
 namespace UTB.EShop.Application.Interfaces.Repositories;
