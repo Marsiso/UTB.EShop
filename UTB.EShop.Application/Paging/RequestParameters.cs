@@ -12,5 +12,5 @@ public abstract class RequestParameters
         set => _pageSize = (value > Constants.Constants.MaxPageSize) ? Constants.Constants.MaxPageSize : value;
     }
 
-    public string SearchTerm { get; set; } = string.Empty;
+    public string? SearchTerm { get; set; }
 }

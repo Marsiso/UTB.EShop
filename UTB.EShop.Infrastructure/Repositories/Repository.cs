@@ -16,15 +16,16 @@ public sealed class Repository<TEntity> : RepositoryBase<TEntity>, IRepository<T
     {
     }
     
-    public async Task<PagedList<TEntity>?> GetAllEntitiesAsync<TEntityParameters>(TEntityParameters entityParameters, bool trackChanges = false)
+    public async Task<PagedList<TEntity>?> GetAllEntitiesAsync<TEntityParameters>(TEntityParameters? entityParameters, bool trackChanges = false)
         where TEntityParameters : RequestParameters
     {
         var entities =  await FindAll(trackChanges)
-            .SearchStringBasedProperties(entityParameters.SearchTerm)
+            .Filter(entityParameters)
+            .SearchStringBasedProperties(entityParameters?.SearchTerm)
             .OrderBy(entity => entity.Id)
             .ToListAsync();
 
-        return PagedList<TEntity>.ToPagedList(entities, entityParameters.PageNumber, entityParameters.PageSize);
+        return PagedList<TEntity>.ToPagedList(entities, entityParameters!.PageNumber, entityParameters.PageSize);
     }
 
     public async Task<TEntity?> GetEntityAsync(int id, bool trackChanges  = false) => 

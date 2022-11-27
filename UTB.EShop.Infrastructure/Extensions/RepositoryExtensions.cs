@@ -1,11 +1,30 @@
 ﻿using System.Reflection;
 using UTB.EShop.Application.Interfaces.Entities;
+using UTB.EShop.Application.Paging;
+using UTB.EShop.Infrastructure.Entities;
 
 namespace UTB.EShop.Infrastructure.Extensions;
 
 public static class RepositoryExtensions
 {
-    public static IQueryable<TEntity> SearchStringBasedProperties<TEntity>(this IQueryable<TEntity> entities, string searchTerm)
+    public static IQueryable<TEntity> Filter<TEntity, TEntityParameters>(this IQueryable<TEntity> entities, TEntityParameters? entityParameters)
+        where TEntity : class, IDataEntity
+        where TEntityParameters : RequestParameters
+    {
+        return entityParameters switch
+        {
+            null => entities,
+            CarouselItemParameters carouselItemParameters => from entity in entities
+                where entity is CarouselItemEntity &&
+                      (entity as CarouselItemEntity).DateCreated >= carouselItemParameters.MinDateTimeCreated &&
+                      (entity as CarouselItemEntity).DateCreated <= carouselItemParameters.MaxDateTimeCreated
+                select entity,
+            _ => entities
+        };
+    }
+    
+    
+    public static IQueryable<TEntity> SearchStringBasedProperties<TEntity>(this IQueryable<TEntity> entities, string? searchTerm)
         where TEntity : class, IDataEntity
     {
         // Is Search Term Valid?
