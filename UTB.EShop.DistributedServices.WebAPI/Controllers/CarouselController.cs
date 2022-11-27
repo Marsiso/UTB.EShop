@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using UTB.EShop.Application.DataTransferObjects.Carousel;
+using UTB.EShop.Application.Interfaces.Models;
 using UTB.EShop.Application.Interfaces.Repositories;
 using UTB.EShop.Application.Paging;
 using UTB.EShop.DistributedServices.WebAPI.Attributes;
@@ -18,12 +19,14 @@ public class CarouselController : ControllerBase
     private readonly IMapper _mapper;
     private readonly ILogger _logger;
     private readonly IRepository<CarouselItemEntity> _repository;
+    private readonly IDataShaper<CarouselItemDto> _dataShaper;
 
-    public CarouselController(IMapper mapper, ILogger logger, IRepository<CarouselItemEntity> repository)
+    public CarouselController(IMapper mapper, ILogger logger, IRepository<CarouselItemEntity> repository, IDataShaper<CarouselItemDto> dataShaper)
     {
         _mapper = mapper;
         _logger = logger;
         _repository = repository;
+        _dataShaper = dataShaper;
     }
 
     [HttpGet(Name = "GetAll")]
@@ -42,7 +45,7 @@ public class CarouselController : ControllerBase
         
         var carouselItemsDto = _mapper.Map<IEnumerable<CarouselItemDto>>(carouselItems);
         
-        return Ok(carouselItemsDto);
+        return Ok(_dataShaper.ShapeData(carouselItemsDto, carouselItemParameters.Fields));
     }
     
     [HttpGet("{id:int}", Name = "GetById")]

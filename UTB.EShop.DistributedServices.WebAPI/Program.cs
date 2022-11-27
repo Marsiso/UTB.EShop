@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using UTB.EShop.Application.DataTransferObjects.Carousel;
+using UTB.EShop.Application.Interfaces.Models;
 using UTB.EShop.Application.Interfaces.Repositories;
 using UTB.EShop.Application.Paging;
 using UTB.EShop.DistributedServices.WebAPI.Attributes;
@@ -13,6 +15,7 @@ using UTB.EShop.Infrastructure.Repositories;
 using UTB.EShop.DistributedServices.WebAPI.Extensions;
 using UTB.EShop.Infrastructure.DbContexts;
 using UTB.EShop.Infrastructure.Mappings;
+using UTB.EShop.Infrastructure.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +48,7 @@ builder.Services
     .AddAutoMapper(typeof(CarouselItemProfile), typeof(ImageFileProfile))
     .AddScoped<ValidationFilterAttribute>()
     .AddScoped<ValidateCarouselItemExistsAttribute>()
+    .AddScoped<IDataShaper<CarouselItemDto>, DataShaper<CarouselItemDto>>()
     .AddEndpointsApiExplorer()
     .AddSwaggerGen()
     .ConfigureCors()
