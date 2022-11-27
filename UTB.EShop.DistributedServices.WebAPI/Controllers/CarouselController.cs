@@ -7,7 +7,6 @@ using UTB.EShop.Application.Interfaces.Repositories;
 using UTB.EShop.Application.Paging;
 using UTB.EShop.DistributedServices.WebAPI.Attributes;
 using UTB.EShop.Infrastructure.Entities;
-using UTB.EShop.Infrastructure.Models.Paging;
 using ILogger = Serilog.ILogger;
 
 namespace UTB.EShop.DistributedServices.WebAPI.Controllers;
@@ -18,9 +17,9 @@ public class CarouselController : ControllerBase
 {
     private readonly IMapper _mapper;
     private readonly ILogger _logger;
-    private readonly IRepository<CarouselItemEntity, CarouselItemParameters> _repository;
+    private readonly IRepository<CarouselItemEntity> _repository;
 
-    public CarouselController(IMapper mapper, ILogger logger, IRepository<CarouselItemEntity, CarouselItemParameters> repository)
+    public CarouselController(IMapper mapper, ILogger logger, IRepository<CarouselItemEntity> repository)
     {
         _mapper = mapper;
         _logger = logger;
@@ -32,7 +31,7 @@ public class CarouselController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetAll([FromQuery] CarouselItemParameters carouselItemParameters)
     {
-        var carouselItems = await _repository.GetAllEntitiesAsync(carouselItemParameters);
+        var carouselItems = await _repository.GetAllEntitiesAsync<CarouselItemParameters>(carouselItemParameters);
         if (carouselItems is null)
         {
             _logger.Warning("Carousel item objects haven't been found.");

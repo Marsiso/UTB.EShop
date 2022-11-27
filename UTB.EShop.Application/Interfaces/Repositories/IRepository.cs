@@ -3,11 +3,11 @@ using UTB.EShop.Application.Paging;
 
 namespace UTB.EShop.Application.Interfaces.Repositories;
 
-public interface IRepository<TEntity, TEntityParameters> 
+public interface IRepository<TEntity> 
     where TEntity : class, IDataEntity
-    where TEntityParameters : RequestParameters
 {
-    Task<PagedList<TEntity>?> GetAllEntitiesAsync(TEntityParameters entityParameters, bool trackChanges  = false);
+    Task<PagedList<TEntity>?> GetAllEntitiesAsync<TEntityParameters>(TEntityParameters entityParameters, bool trackChanges  = false)
+        where TEntityParameters : RequestParameters;
     Task<TEntity?> GetEntityAsync(int id, bool trackChanges  = false);
     
     Task<IEnumerable<TEntity>> GetByIdsAsync(IEnumerable<int> ids, bool trackChanges = false);

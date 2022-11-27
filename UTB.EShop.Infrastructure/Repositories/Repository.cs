@@ -1,23 +1,26 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Runtime.CompilerServices;
+using Microsoft.EntityFrameworkCore;
 using UTB.EShop.Application.Interfaces.Entities;
 using UTB.EShop.Application.Interfaces.Repositories;
 using UTB.EShop.Application.Paging;
 using UTB.EShop.Infrastructure.DbContexts;
+using UTB.EShop.Infrastructure.Extensions;
 
 namespace UTB.EShop.Infrastructure.Repositories;
 
-public sealed class Repository<TEntity, TEntityParameters> : RepositoryBase<TEntity>, IRepository<TEntity, TEntityParameters> 
+public sealed class Repository<TEntity> : RepositoryBase<TEntity>, IRepository<TEntity> 
     where TEntity : class, IDataEntity
-    where TEntityParameters : RequestParameters
 {
     public Repository(RepositoryContext repositoryContext) 
         : base(repositoryContext)
     {
     }
     
-    public async Task<PagedList<TEntity>?> GetAllEntitiesAsync(TEntityParameters entityParameters, bool trackChanges = false)
+    public async Task<PagedList<TEntity>?> GetAllEntitiesAsync<TEntityParameters>(TEntityParameters entityParameters, bool trackChanges = false)
+        where TEntityParameters : RequestParameters
     {
         var entities =  await FindAll(trackChanges)
+            .SearchStringBasedProperties(entityParameters.SearchTerm)
             .OrderBy(entity => entity.Id)
             .ToListAsync();
 

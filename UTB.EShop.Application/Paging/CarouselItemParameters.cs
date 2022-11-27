@@ -1,6 +1,4 @@
-﻿using UTB.EShop.Application.Paging;
-
-namespace UTB.EShop.Infrastructure.Models.Paging;
+﻿namespace UTB.EShop.Application.Paging;
 
 public sealed class CarouselItemParameters : RequestParameters
 {
