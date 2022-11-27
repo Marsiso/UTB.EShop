@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using UTB.EShop.Application.Interfaces.Entities;
 using UTB.EShop.Application.Interfaces.Repositories;
+using UTB.EShop.Infrastructure.DbContexts;
 
 namespace UTB.EShop.Infrastructure.Repositories;
 

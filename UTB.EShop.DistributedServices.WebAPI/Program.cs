@@ -6,9 +6,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using UTB.EShop.Application.Interfaces.Repositories;
+using UTB.EShop.DistributedServices.WebAPI.Attributes;
 using UTB.EShop.Infrastructure.Entities;
 using UTB.EShop.Infrastructure.Repositories;
 using UTB.EShop.DistributedServices.WebAPI.Extensions;
+using UTB.EShop.Infrastructure.DbContexts;
 using UTB.EShop.Infrastructure.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,6 +42,8 @@ builder.Services
     .AddScoped<IRepository<CarouselItemEntity>, Repository<CarouselItemEntity>>()
     .AddScoped<IRepository<ImageFileEntity>, Repository<ImageFileEntity>>()
     .AddAutoMapper(typeof(CarouselItemProfile), typeof(ImageFileProfile))
+    .AddScoped<ValidationFilterAttribute>()
+    .AddScoped<ValidateCarouselItemExistsAttribute>()
     .AddEndpointsApiExplorer()
     .AddSwaggerGen()
     .ConfigureCors()

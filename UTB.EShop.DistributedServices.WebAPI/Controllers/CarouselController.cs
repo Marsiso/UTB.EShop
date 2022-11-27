@@ -1,14 +1,9 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using UTB.EShop.Application.DataTransferObjects.Carousel;
 using UTB.EShop.Application.Interfaces.Repositories;
+using UTB.EShop.DistributedServices.WebAPI.Attributes;
 using UTB.EShop.Infrastructure.Entities;
 using ILogger = Serilog.ILogger;
 
@@ -81,49 +76,29 @@ public class CarouselController : ControllerBase
     }
 
     [HttpDelete("{id:int}", Name = "Delete")]
+    [ServiceFilter(typeof(ValidateCarouselItemExistsAttribute))]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Delete(int id)
     {
-        var carouselItem = await _repository.GetEntityAsync(id);
-        if (carouselItem is null)
-        {
-            _logger.Warning("Carousel item object with id: {0} hasn't been found.", id.ToString());
-            return NotFound();
-        }
+        var carouselItem = HttpContext.Items["carouselItem"] as CarouselItemEntity;
         
-        _repository.DeleteEntity(carouselItem);
+        _repository.DeleteEntity(carouselItem!);
         await _repository.SaveAsync();
+        
         return NoContent();
     }
     
     [HttpPost(Name = "Post")]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Post([FromBody] CarouselItemForCreationDto? carouselItem)
     {
-        if (carouselItem is null)
-        {
-            _logger.Warning("{0} cannot be an null object.", nameof(CarouselItemForCreationDto));
-            return BadRequest("CarouselItemForCreation object sent from client is null.");   
-        }
-
-        // Map source to destination
         var carouselItemEntity = _mapper.Map<CarouselItemEntity>(carouselItem);
         
-        // Validate an object
-        var context = new ValidationContext(carouselItemEntity);
-        var validationResults = new List<ValidationResult>();
-        var isValid = Validator.TryValidateObject(carouselItemEntity, context, validationResults, true);
-        if (!isValid)
-        {
-            _logger.Warning($"Invalid model state for the {nameof(CarouselItemEntity)} object.");
-            return UnprocessableEntity($"Invalid model state for the {nameof(CarouselItemEntity)} object.");
-        }
-
-
         _repository.CreateEntity(carouselItemEntity);
         await _repository.SaveAsync();
 
@@ -142,19 +117,21 @@ public class CarouselController : ControllerBase
             _logger.Warning("Carousel items collection sent from client can't be an null object.");
             return BadRequest("Carousel items collection sent from client can't be an null object.");
         }
+        
         var itemEntities = _mapper.Map<IEnumerable<CarouselItemEntity>>(itemCollection);
-        foreach (var itemEntity in itemEntities)
-        {
-            _repository.CreateEntity(itemEntity);
-        }
+        foreach (var itemEntity in itemEntities) _repository.CreateEntity(itemEntity);
+
         await _repository.SaveAsync();
+        
         var collectionToReturn = _mapper.Map<IEnumerable<CarouselItemDto>>(itemEntities);
         var ids = string.Join(",", collectionToReturn.Select(dto => dto.Id));
+        
         return CreatedAtRoute("GetByIds", new { ids }, 
             collectionToReturn);
     }
 
     [HttpPatch("{id:int}")]
+    [ServiceFilter(typeof(ValidateCarouselItemExistsAttribute))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -166,69 +143,35 @@ public class CarouselController : ControllerBase
             return BadRequest("JsonPatchDocument<CarouselItemForUpdateDto> object sent from client is null.");
         }
 
-        var carouselItemEntity = await _repository.GetEntityAsync(id, true);
-        if (carouselItemEntity is null)
-        {
-            _logger.Warning("Carousel item object with id: {0} hasn't been found.", id.ToString());
-            return NotFound();  
-        }
-
-        // Apply patch
+        var carouselItemEntity = HttpContext.Items["carouselItem"] as CarouselItemEntity;
+        
         var carouselItemToPatch = _mapper.Map<CarouselItemForUpdateDto>(carouselItemEntity);
         patchDocument.ApplyTo(carouselItemToPatch);
 
-        // Save changes
         _mapper.Map(carouselItemToPatch, carouselItemEntity);
         
-        // Validate an object
-        var context = new ValidationContext(carouselItemEntity);
-        var validationResults = new List<ValidationResult>();
-        var isValid = Validator.TryValidateObject(carouselItemEntity, context, validationResults, true);
-        if (!isValid)
+        TryValidateModel(carouselItemToPatch);
+        if (!ModelState.IsValid)
         {
             _logger.Warning($"Invalid model state for the {nameof(CarouselItemEntity)} object.");
             return UnprocessableEntity($"Invalid model state for the {nameof(CarouselItemEntity)} object.");   
         }
 
-        // Save changes
         await _repository.SaveAsync();
 
         return NoContent();
     }
     
     [HttpPut("{id:int}")]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
+    [ServiceFilter(typeof(ValidateCarouselItemExistsAttribute))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Put(int id, [FromBody] CarouselItemForUpdateDto? carouselItem)
     {
-        if (carouselItem is null)
-        {
-            _logger.Warning($"{nameof(CarouselItemForUpdateDto)} object sent from client cannot be null.");
-            return BadRequest($"{nameof(CarouselItemForUpdateDto)} object sent from client cannot be null.");
-        }
-
-        var carouselItemEntity = await _repository.GetEntityAsync(id, true);
-        if (carouselItemEntity is null)
-        {
-            _logger.Warning($"Requested object with id: {id} hasn't been found.");
-            return NotFound();
-        }
-
-        // Apply changes
+        var carouselItemEntity = HttpContext.Items["carouselItem"] as CarouselItemEntity;
         _mapper.Map(carouselItem, carouselItemEntity);
-        
-        // Validate an object
-        var context = new ValidationContext(carouselItemEntity);
-        var validationResults = new List<ValidationResult>();
-        var isValid = Validator.TryValidateObject(carouselItemEntity, context, validationResults, true);
-        if (!isValid)
-        {
-            _logger.Warning($"Invalid model state for the {nameof(CarouselItemEntity)} object.");
-            return UnprocessableEntity($"Invalid model state for the {nameof(CarouselItemEntity)} object.");
-        }
-
-        // Save changes
         await _repository.SaveAsync();
 
         return NoContent();

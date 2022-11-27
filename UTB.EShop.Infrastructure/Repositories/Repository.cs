@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using UTB.EShop.Application.Interfaces.Entities;
 using UTB.EShop.Application.Interfaces.Repositories;
+using UTB.EShop.Infrastructure.DbContexts;
 
 namespace UTB.EShop.Infrastructure.Repositories;
 

@@ -2,7 +2,7 @@
 using UTB.EShop.Infrastructure.Entities;
 using UTB.EShop.Infrastructure.Entities.Configurations;
 
-namespace UTB.EShop.Infrastructure.Repositories;
+namespace UTB.EShop.Infrastructure.DbContexts;
 
 public sealed class RepositoryContext : DbContext
 {
