@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Marvin.Cache.Headers;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -51,4 +52,21 @@ public static class ServiceExtensions
 
         return services;
     }
+    
+    public static IServiceCollection ConfigureResponseCaching(this IServiceCollection services) => 
+        services.AddResponseCaching();
+    
+    public static IServiceCollection ConfigureHttpCacheHeaders(this IServiceCollection services) => 
+        services.AddHttpCacheHeaders(
+            (expirationOpt) =>
+            {
+                expirationOpt.MaxAge = 65;
+                expirationOpt.CacheLocation = CacheLocation.Private;
+            },
+            (validationOpt) =>
+            {
+                validationOpt.MustRevalidate = true;
+            });
+
+
 }

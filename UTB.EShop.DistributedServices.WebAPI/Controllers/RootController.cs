@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Marvin.Cache.Headers;
+using Microsoft.AspNetCore.Mvc;
 using UTB.EShop.Application.Hateos;
 
 namespace UTB.EShop.DistributedServices.WebAPI.Controllers;
@@ -6,6 +7,9 @@ namespace UTB.EShop.DistributedServices.WebAPI.Controllers;
 [ApiController]
 [ApiVersion("1.0")]
 [Route("api")]
+//[ResponseCache(CacheProfileName = "120SecondsDuration")]
+[HttpCacheExpiration(CacheLocation = CacheLocation.Public, MaxAge = 60)] 
+[HttpCacheValidation(MustRevalidate = false)]
 public class RootController : ControllerBase
 {
     private readonly LinkGenerator _linkGenerator;

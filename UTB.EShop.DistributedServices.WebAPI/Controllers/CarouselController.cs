@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
@@ -17,6 +18,7 @@ namespace UTB.EShop.DistributedServices.WebAPI.Controllers;
 [ApiController]
 [ApiVersion("1.0")]
 [Route("api/[Controller]")]
+//[ResponseCache(CacheProfileName = "120SecondsDuration")]
 public class CarouselController : ControllerBase
 {
     private readonly IMapper _mapper;
@@ -43,6 +45,8 @@ public class CarouselController : ControllerBase
 
     [HttpHead]
     [HttpGet(Name = "GetAllCarouselItems")]
+    [HttpCacheExpiration(CacheLocation = CacheLocation.Public, MaxAge = 60)] 
+    [HttpCacheValidation(MustRevalidate = false)]
     [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -65,6 +69,9 @@ public class CarouselController : ControllerBase
     }
     
     [HttpGet("{id:int}", Name = "GetCarouselItemById")]
+    //[ResponseCache(Duration = 60)]
+    [HttpCacheExpiration(CacheLocation = CacheLocation.Public, MaxAge = 60)] 
+    [HttpCacheValidation(MustRevalidate = false)]
     [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

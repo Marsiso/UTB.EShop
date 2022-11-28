@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using UTB.EShop.Application.DataShapers;
 using UTB.EShop.Application.DataTransferObjects.Carousel;
@@ -28,6 +29,7 @@ builder.Services
     {
         config.RespectBrowserAcceptHeader = true;
         config.ReturnHttpNotAcceptable = true;
+        config.CacheProfiles.Add("120SecondsDuration", new CacheProfile { Duration = 120 });
     })
     .AddNewtonsoftJson();
 
@@ -50,7 +52,9 @@ builder.Services
     .ConfigureIISIntegration()
     .AddScoped<ValidateMediaTypeAttribute>()
     .AddScoped<CarouselItemLinks>()
-    .ConfigureVersioning();
+    .ConfigureVersioning()
+    .ConfigureResponseCaching()
+    .ConfigureHttpCacheHeaders();
 
 logger.Information("Services have been configured.");
 
@@ -73,6 +77,8 @@ app
     {
         ForwardedHeaders = ForwardedHeaders.All
     })
+    .UseResponseCaching()
+    .UseHttpCacheHeaders()
     .UseRouting()
     .UseAuthorization()
     .UseEndpoints(endpoints =>
