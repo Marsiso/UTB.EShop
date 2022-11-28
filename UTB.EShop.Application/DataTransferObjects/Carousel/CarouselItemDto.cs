@@ -1,6 +1,8 @@
-﻿namespace UTB.EShop.Application.DataTransferObjects.Carousel;
+﻿using UTB.EShop.Application.Interfaces.Entities;
 
-public sealed class CarouselItemDto
+namespace UTB.EShop.Application.DataTransferObjects.Carousel;
+
+public sealed class CarouselItemDto : IDataEntity
 {
     public  int Id { get; set; }
     

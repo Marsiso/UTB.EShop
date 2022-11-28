@@ -1,21 +1,16 @@
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Serilog;
+using UTB.EShop.Application.DataShapers;
 using UTB.EShop.Application.DataTransferObjects.Carousel;
 using UTB.EShop.Application.Interfaces.Models;
 using UTB.EShop.Application.Interfaces.Repositories;
-using UTB.EShop.Application.Paging;
 using UTB.EShop.DistributedServices.WebAPI.Attributes;
 using UTB.EShop.Infrastructure.Entities;
 using UTB.EShop.Infrastructure.Repositories;
 using UTB.EShop.DistributedServices.WebAPI.Extensions;
+using UTB.EShop.DistributedServices.WebAPI.Utility;
 using UTB.EShop.Infrastructure.DbContexts;
 using UTB.EShop.Infrastructure.Mappings;
-using UTB.EShop.Infrastructure.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,14 +29,14 @@ builder.Services
         config.RespectBrowserAcceptHeader = true;
         config.ReturnHttpNotAcceptable = true;
     })
-    .AddNewtonsoftJson()
-    .AddXmlDataContractSerializerFormatters(); ;
+    .AddNewtonsoftJson();
 
 builder.Logging
     .ClearProviders()
     .AddSerilog();
 
 builder.Services
+    .AddCustomMediaTypes()
     .AddSqlServer<RepositoryContext>(builder.Configuration.GetConnectionString("Mssql"), opt => opt.MigrationsAssembly(typeof(Program).Assembly.FullName))
     .AddScoped<IRepository<CarouselItemEntity>, Repository<CarouselItemEntity>>()
     .AddScoped<IRepository<ImageFileEntity>, Repository<ImageFileEntity>>()
@@ -52,7 +47,9 @@ builder.Services
     .AddEndpointsApiExplorer()
     .AddSwaggerGen()
     .ConfigureCors()
-    .ConfigureIISIntegration();
+    .ConfigureIISIntegration()
+    .AddScoped<ValidateMediaTypeAttribute>()
+    .AddScoped<CarouselItemLinks>();
 
 logger.Information("Services have been configured.");
 
@@ -67,7 +64,7 @@ if (app.Environment.IsDevelopment())
 else
     app.UseHsts();
 
-    app
+app
     .UseHttpsRedirection()
     .UseStaticFiles()
     .UseCors("Default")
@@ -85,4 +82,6 @@ else
 logger.Information("Project runtime behaviour have been configured.");
 
 app.Run();
+
 logger.Information("Project is running ...");
+logger.Dispose();
