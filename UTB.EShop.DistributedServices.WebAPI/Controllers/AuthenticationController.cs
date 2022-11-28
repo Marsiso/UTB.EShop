@@ -11,6 +11,7 @@ namespace UTB.EShop.DistributedServices.WebAPI.Controllers;
 
 [Route("api/[Controller]")]
 [ApiController]
+[ApiExplorerSettings(GroupName = "v1")]
 public class AuthenticationController : ControllerBase
 {
     private readonly ILogger _logger;

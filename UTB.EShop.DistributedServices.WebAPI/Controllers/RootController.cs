@@ -7,6 +7,7 @@ namespace UTB.EShop.DistributedServices.WebAPI.Controllers;
 [ApiController]
 [ApiVersion("1.0")]
 [Route("api")]
+[ApiExplorerSettings(GroupName = "v1")]
 //[ResponseCache(CacheProfileName = "120SecondsDuration")]
 [HttpCacheExpiration(CacheLocation = CacheLocation.Public, MaxAge = 60)] 
 [HttpCacheValidation(MustRevalidate = false)]

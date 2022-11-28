@@ -18,6 +18,7 @@ namespace UTB.EShop.DistributedServices.WebAPI.Controllers;
 [ApiController]
 [ApiVersion("1.0")]
 [Route("api/[Controller]")]
+[ApiExplorerSettings(GroupName = "v1")]
 //[ResponseCache(CacheProfileName = "120SecondsDuration")]
 public class CarouselController : ControllerBase
 {

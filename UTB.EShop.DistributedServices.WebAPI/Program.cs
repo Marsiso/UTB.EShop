@@ -1,6 +1,7 @@
 using AspNetCoreRateLimit;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using Serilog;
 using UTB.EShop.Application.DataShapers;
@@ -51,7 +52,7 @@ builder.Services
     .AddScoped<ValidateCarouselItemExistsAttribute>()
     .AddScoped<IDataShaper<CarouselItemDto>, DataShaper<CarouselItemDto>>()
     .AddEndpointsApiExplorer()
-    .AddSwaggerGen()
+    .ConfigureSwagger()
     .ConfigureCors()
     .ConfigureIISIntegration()
     .AddScoped<ValidateMediaTypeAttribute>()
@@ -83,6 +84,8 @@ else
     app.UseHsts();
 
 app
+    .UseSwagger()
+    .UseSwaggerUI()
     .UseHttpsRedirection()
     .UseStaticFiles()
     .UseCors("Default")
