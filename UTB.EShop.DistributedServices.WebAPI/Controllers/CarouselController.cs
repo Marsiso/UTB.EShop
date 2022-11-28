@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using UTB.EShop.Application.DataTransferObjects.Carousel;
 using UTB.EShop.Application.Interfaces.Models;
@@ -32,6 +33,14 @@ public class CarouselController : ControllerBase
         _carouselItemLinks = carouselItemLinks;
     }
 
+    [HttpOptions]
+    public IActionResult GetCarouselItemsOptions()
+    {
+        Response.Headers.Add("Allow", "GET, OPTIONS, POST");
+        return Ok();
+    }
+
+    [HttpHead]
     [HttpGet(Name = "GetAllCarouselItems")]
     [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
     [ProducesResponseType(StatusCodes.Status200OK)]

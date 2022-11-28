@@ -1,4 +1,6 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using UTB.EShop.Application.Interfaces.Entities;
 using UTB.EShop.Application.Interfaces.Models;
 using UTB.EShop.Infrastructure.Models;
@@ -33,11 +35,12 @@ public sealed class DataShaper<TEntity> : IDataShaper<TEntity>
         if (!string.IsNullOrWhiteSpace(fieldsString))
         {
             var fields = fieldsString.Split(',', StringSplitOptions.RemoveEmptyEntries);
-            foreach (var field in fields)
+            for (var index = 0; index < fields.Length; index++)
             {
+                var field = fields[index];
                 var property = Properties
                     .FirstOrDefault(pi => pi.Name.Equals(field.Trim(), StringComparison.InvariantCultureIgnoreCase));
-                
+
                 if (property == null) continue;
                 requiredProperties.Add(property);
             }
@@ -59,6 +62,27 @@ public sealed class DataShaper<TEntity> : IDataShaper<TEntity>
 
         return shapedData;
     }
+    
+    
+    /*private IEnumerable<ShapedEntity> FetchData(IEnumerable<TEntity> entities, IEnumerable<PropertyInfo> requiredProperties) =>
+        entities.Select(entity => FetchDataForEntity(entity, requiredProperties)).ToList();*/
+    
+    /*private IEnumerable<ShapedEntity> FetchData(List<TEntity>? entities,
+        IEnumerable<PropertyInfo> requiredProperties)
+    {
+        var shapedData = new List<ShapedEntity>();
+
+        Span<TEntity> listAsSpan = CollectionsMarshal.AsSpan(entities);
+        ref var searchSpace = ref MemoryMarshal.GetReference(listAsSpan);
+        for (var index = 0; index < listAsSpan.Length; index++)
+        {
+            var entity = Unsafe.Add(ref searchSpace, index);
+            var shapedObject = FetchDataForEntity(entity, requiredProperties);
+            shapedData.Add(shapedObject);
+        }
+
+        return shapedData;
+    }*/
 
     private ShapedEntity FetchDataForEntity(TEntity entity, IEnumerable<PropertyInfo>
         requiredProperties)

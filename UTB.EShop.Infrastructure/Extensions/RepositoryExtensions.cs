@@ -15,8 +15,8 @@ public static class RepositoryExtensions
         {
             null => entities,
             CarouselItemParameters carouselItemParameters => from entity in entities
-                where entity is CarouselItemEntity &&
-                      (entity as CarouselItemEntity).DateCreated >= carouselItemParameters.MinDateTimeCreated &&
+                where entity is CarouselItemEntity && carouselItemParameters.IsValidDateRange
+                where (entity as CarouselItemEntity).DateCreated >= carouselItemParameters.MinDateTimeCreated &&
                       (entity as CarouselItemEntity).DateCreated <= carouselItemParameters.MaxDateTimeCreated
                 select entity,
             _ => entities
