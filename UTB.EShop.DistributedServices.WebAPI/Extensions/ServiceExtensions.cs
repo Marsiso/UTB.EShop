@@ -29,6 +29,9 @@ public static class ServiceExtensions
                 newtonsoftJsonOutputFormatter
                     .SupportedMediaTypes
                     .Add("application/vnd.hateoas+json");
+                newtonsoftJsonOutputFormatter
+                    .SupportedMediaTypes
+                    .Add("application/vnd.apiroot+json");
             }
         });
 
