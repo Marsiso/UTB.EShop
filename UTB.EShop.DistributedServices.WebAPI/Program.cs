@@ -49,7 +49,8 @@ builder.Services
     .ConfigureCors()
     .ConfigureIISIntegration()
     .AddScoped<ValidateMediaTypeAttribute>()
-    .AddScoped<CarouselItemLinks>();
+    .AddScoped<CarouselItemLinks>()
+    .ConfigureVersioning();
 
 logger.Information("Services have been configured.");
 

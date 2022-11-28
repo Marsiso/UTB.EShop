@@ -3,8 +3,9 @@ using UTB.EShop.Application.Hateos;
 
 namespace UTB.EShop.DistributedServices.WebAPI.Controllers;
 
-[Route("api")]
 [ApiController]
+[ApiVersion("1.0")]
+[Route("api")]
 public class RootController : ControllerBase
 {
     private readonly LinkGenerator _linkGenerator;

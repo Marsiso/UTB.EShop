@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace UTB.EShop.DistributedServices.WebAPI.Extensions;
@@ -33,6 +34,19 @@ public static class ServiceExtensions
                     .SupportedMediaTypes
                     .Add("application/vnd.apiroot+json");
             }
+        });
+
+        return services;
+    }
+    
+    public static IServiceCollection ConfigureVersioning(this IServiceCollection services)
+    {
+        services.AddApiVersioning(opt =>
+        {
+            opt.ReportApiVersions = true;
+            opt.AssumeDefaultVersionWhenUnspecified = true;
+            opt.DefaultApiVersion = new ApiVersion(1, 0);
+            opt.ApiVersionReader = new HeaderApiVersionReader("api-version");
         });
 
         return services;

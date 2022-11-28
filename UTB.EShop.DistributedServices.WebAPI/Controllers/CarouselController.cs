@@ -15,7 +15,8 @@ using ILogger = Serilog.ILogger;
 namespace UTB.EShop.DistributedServices.WebAPI.Controllers;
 
 [ApiController]
-[Route("[Controller]")]
+[ApiVersion("1.0")]
+[Route("api/[Controller]")]
 public class CarouselController : ControllerBase
 {
     private readonly IMapper _mapper;
