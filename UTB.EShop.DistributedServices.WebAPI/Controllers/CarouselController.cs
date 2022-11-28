@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Marvin.Cache.Headers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using UTB.EShop.Application.DataTransferObjects.Carousel;
 using UTB.EShop.Application.Interfaces.Models;
@@ -44,7 +44,7 @@ public class CarouselController : ControllerBase
     }
 
     [HttpHead]
-    [HttpGet(Name = "GetAllCarouselItems")]
+    [HttpGet(Name = "GetAllCarouselItems"), Authorize(Roles = "Administrator")]
     [HttpCacheExpiration(CacheLocation = CacheLocation.Public, MaxAge = 60)] 
     [HttpCacheValidation(MustRevalidate = false)]
     [ServiceFilter(typeof(ValidateMediaTypeAttribute))]

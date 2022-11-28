@@ -1,10 +1,16 @@
-﻿using AspNetCoreRateLimit;
+﻿using System.Text;
+using AspNetCoreRateLimit;
 using Marvin.Cache.Headers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using UTB.EShop.Infrastructure.DbContexts;
+using UTB.EShop.Infrastructure.Identity;
 
 namespace UTB.EShop.DistributedServices.WebAPI.Extensions;
 
@@ -76,7 +82,7 @@ public static class ServiceExtensions
             new RateLimitRule
             {
                 Endpoint = "*",
-                Limit= 3,
+                Limit= 30,
                 Period = "5m"
             }
         };
@@ -92,4 +98,61 @@ public static class ServiceExtensions
 
         return services;
     }
+    
+    public static IServiceCollection ConfigureIdentity(this IServiceCollection services)
+    {
+        var builder = services.AddIdentityCore<User>(options =>
+        {
+            options.Password.RequireDigit = true;
+            options.Password.RequireLowercase = false;
+            options.Password.RequireUppercase = false;
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequiredLength = 10;
+            options.User.RequireUniqueEmail = true;
+        });
+        
+        builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
+        builder
+            .AddEntityFrameworkStores<RepositoryContext>()
+            .AddDefaultTokenProviders();
+
+        return services;
+    }
+
+    public static IServiceCollection AddAuthenticationWrapper(this IServiceCollection services)
+    {
+        services.AddAuthentication();
+        return services;
+    }
+    
+    public static IServiceCollection ConfigureJWT(this IServiceCollection services, IConfiguration 
+        configuration)
+    {
+        var jwtSettings = configuration.GetSection("JwtSettings");
+        //var secretKey = Environment.GetEnvironmentVariable("JWTSECRET");
+        
+        services
+            .AddAuthentication(opt => {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = jwtSettings.GetSection("validIssuer").Value,
+                    ValidAudience = jwtSettings.GetSection("validAudience").Value,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.GetSection("serverSecret").Value))
+                    //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey)
+                };
+            });
+
+        return services;
+    }
+
 }

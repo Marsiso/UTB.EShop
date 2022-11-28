@@ -1,9 +1,11 @@
 using AspNetCoreRateLimit;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Serialization;
 using Serilog;
 using UTB.EShop.Application.DataShapers;
 using UTB.EShop.Application.DataTransferObjects.Carousel;
+using UTB.EShop.Application.Interfaces.Identity;
 using UTB.EShop.Application.Interfaces.Models;
 using UTB.EShop.Application.Interfaces.Repositories;
 using UTB.EShop.DistributedServices.WebAPI.Attributes;
@@ -12,6 +14,7 @@ using UTB.EShop.Infrastructure.Repositories;
 using UTB.EShop.DistributedServices.WebAPI.Extensions;
 using UTB.EShop.DistributedServices.WebAPI.Utility;
 using UTB.EShop.Infrastructure.DbContexts;
+using UTB.EShop.Infrastructure.Identity;
 using UTB.EShop.Infrastructure.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,7 +46,7 @@ builder.Services
     .AddSqlServer<RepositoryContext>(builder.Configuration.GetConnectionString("Mssql"), opt => 
         opt.MigrationsAssembly(typeof(Program).Assembly.FullName))
     .AddScoped<IRepository<CarouselItemEntity>, Repository<CarouselItemEntity>>()
-    .AddAutoMapper(typeof(CarouselItemProfile), typeof(ImageFileProfile))
+    .AddAutoMapper(typeof(CarouselItemProfile), typeof(ImageFileProfile), typeof(IdentityProfile))
     .AddScoped<ValidationFilterAttribute>()
     .AddScoped<ValidateCarouselItemExistsAttribute>()
     .AddScoped<IDataShaper<CarouselItemDto>, DataShaper<CarouselItemDto>>()
@@ -59,8 +62,13 @@ builder.Services
     .AddMemoryCache()
     .ConfigureRateLimitingOptions()
     .AddHttpContextAccessor()
-    .AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();;
+    .AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>()
+    .AddAuthenticationWrapper()
+    .ConfigureIdentity()
+    .ConfigureJWT(builder.Configuration)
+    .AddScoped<IAuthenticationManager, AuthenticationManager>();;
 
+    
 logger.Information("Services have been configured.");
 
 var app = builder.Build();
@@ -86,6 +94,7 @@ app
     .UseHttpCacheHeaders()
     .UseIpRateLimiting()
     .UseRouting()
+    .UseAuthentication()
     .UseAuthorization()
     .UseEndpoints(endpoints =>
     {
