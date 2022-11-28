@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
@@ -39,9 +40,9 @@ builder.Logging
 
 builder.Services
     .AddCustomMediaTypes()
-    .AddSqlServer<RepositoryContext>(builder.Configuration.GetConnectionString("Mssql"), opt => opt.MigrationsAssembly(typeof(Program).Assembly.FullName))
+    .AddSqlServer<RepositoryContext>(builder.Configuration.GetConnectionString("Mssql"), opt => 
+        opt.MigrationsAssembly(typeof(Program).Assembly.FullName))
     .AddScoped<IRepository<CarouselItemEntity>, Repository<CarouselItemEntity>>()
-    .AddScoped<IRepository<ImageFileEntity>, Repository<ImageFileEntity>>()
     .AddAutoMapper(typeof(CarouselItemProfile), typeof(ImageFileProfile))
     .AddScoped<ValidationFilterAttribute>()
     .AddScoped<ValidateCarouselItemExistsAttribute>()
@@ -54,7 +55,11 @@ builder.Services
     .AddScoped<CarouselItemLinks>()
     .ConfigureVersioning()
     .ConfigureResponseCaching()
-    .ConfigureHttpCacheHeaders();
+    .ConfigureHttpCacheHeaders()
+    .AddMemoryCache()
+    .ConfigureRateLimitingOptions()
+    .AddHttpContextAccessor()
+    .AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();;
 
 logger.Information("Services have been configured.");
 
@@ -79,6 +84,7 @@ app
     })
     .UseResponseCaching()
     .UseHttpCacheHeaders()
+    .UseIpRateLimiting()
     .UseRouting()
     .UseAuthorization()
     .UseEndpoints(endpoints =>
