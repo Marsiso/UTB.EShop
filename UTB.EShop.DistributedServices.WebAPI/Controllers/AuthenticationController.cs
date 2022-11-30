@@ -49,7 +49,7 @@ public class AuthenticationController : ControllerBase
         return StatusCode(201);
     }
     
-    [HttpPost("login", Name = "AuthenticateUser")]
+    [HttpPost("Login", Name = "AuthenticateUser")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
     public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
     {

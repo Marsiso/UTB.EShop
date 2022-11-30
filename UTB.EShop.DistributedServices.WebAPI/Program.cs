@@ -38,24 +38,22 @@ builder.Services
     })
     .AddNewtonsoftJson();
 
-builder.Logging
-    .ClearProviders()
-    .AddSerilog();
-
 builder.Services
     .AddCustomMediaTypes()
-    .AddSqlServer<RepositoryContext>(builder.Configuration.GetConnectionString("Mssql"), opt => 
+    .AddSqlServer<RepositoryContext>(builder.Configuration.GetConnectionString("Mssql"), opt =>
         opt.MigrationsAssembly(typeof(Program).Assembly.FullName))
     .AddScoped<IRepository<CarouselItemEntity>, Repository<CarouselItemEntity>>()
+    .AddScoped<IRepository<ImageFileEntity>, Repository<ImageFileEntity>>()
     .AddAutoMapper(typeof(CarouselItemProfile), typeof(ImageFileProfile), typeof(IdentityProfile))
     .AddScoped<ValidationFilterAttribute>()
     .AddScoped<ValidateCarouselItemExistsAttribute>()
+    .AddScoped<ValidateMediaTypeAttribute>()
+    .AddScoped<ValidateImageFilesAttribute>()
     .AddScoped<IDataShaper<CarouselItemDto>, DataShaper<CarouselItemDto>>()
     .AddEndpointsApiExplorer()
     .ConfigureSwagger()
     .ConfigureCors()
     .ConfigureIISIntegration()
-    .AddScoped<ValidateMediaTypeAttribute>()
     .AddScoped<CarouselItemLinks>()
     .ConfigureVersioning()
     .ConfigureResponseCaching()
@@ -67,9 +65,13 @@ builder.Services
     .AddAuthenticationWrapper()
     .ConfigureIdentity()
     .ConfigureJWT(builder.Configuration)
-    .AddScoped<IAuthenticationManager, AuthenticationManager>();;
+    .AddScoped<IAuthenticationManager, AuthenticationManager>();
 
-    
+builder.Logging
+    .ClearProviders()
+    .AddSerilog();
+
+
 logger.Information("Services have been configured.");
 
 var app = builder.Build();

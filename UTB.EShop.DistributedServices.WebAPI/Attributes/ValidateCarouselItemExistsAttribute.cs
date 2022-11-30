@@ -20,7 +20,7 @@ public class ValidateCarouselItemExistsAttribute : IAsyncActionFilter
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
         var method = context.HttpContext.Request.Method;
-        var trackChanges = method.Equals("PUT") || method.Equals("PATCH");
+        var trackChanges = method.Equals("PUT") || method.Equals("PATCH") || method.Equals("POST");
         var id = (int)context.ActionArguments["id"]!;
         
         var carouselItemEntity = await _repository.GetEntityAsync(id, trackChanges);

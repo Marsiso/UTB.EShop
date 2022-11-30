@@ -27,10 +27,19 @@ public sealed class Repository<TEntity> : RepositoryBase<TEntity>, IRepository<T
 
         return PagedList<TEntity>.ToPagedList(entities, entityParameters!.PageNumber, entityParameters.PageSize);
     }
+    
+    public async Task<IEnumerable<TEntity>> GetAllEntitiesAsync(bool trackChanges = false) =>
+        await FindAll(trackChanges)
+            .OrderBy(entity => entity.Id)
+            .ToListAsync();
 
     public async Task<TEntity?> GetEntityAsync(int id, bool trackChanges  = false) => 
         await FindByCondition(expression: entity => entity.Id.Equals(id), trackChanges)
             .SingleOrDefaultAsync();
+
+    public async Task<bool> Exist(int id) => 
+        await FindByCondition(entity => entity.Id == id, false)
+            .AnyAsync();
 
     public async Task<IEnumerable<TEntity>> GetByIdsAsync(IEnumerable<int> ids, bool trackChanges = false) =>
         await FindByCondition(expression: entity => ids.Contains(entity.Id), trackChanges)

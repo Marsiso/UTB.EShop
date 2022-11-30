@@ -19,7 +19,6 @@ namespace UTB.EShop.DistributedServices.WebAPI.Controllers;
 [ApiVersion("1.0")]
 [Route("api/[Controller]")]
 [ApiExplorerSettings(GroupName = "v1")]
-//[ResponseCache(CacheProfileName = "120SecondsDuration")]
 public class CarouselController : ControllerBase
 {
     private readonly IMapper _mapper;
@@ -43,9 +42,9 @@ public class CarouselController : ControllerBase
         Response.Headers.Add("Allow", "GET, OPTIONS, POST");
         return Ok();
     }
-
+    
     [HttpHead]
-    [HttpGet(Name = "GetAllCarouselItems"), Authorize(Roles = "Administrator")]
+    [HttpGet(Name = "GetAllCarouselItems"), Authorize]
     [HttpCacheExpiration(CacheLocation = CacheLocation.Public, MaxAge = 60)] 
     [HttpCacheValidation(MustRevalidate = false)]
     [ServiceFilter(typeof(ValidateMediaTypeAttribute))]

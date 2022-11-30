@@ -12,18 +12,10 @@ public sealed class ImageFileEntity : IDataEntity
     [Column("pk_image_file")]
     public int Id { get; set; }
 
-    [Column("file_name")]
+    [Column("file_path")]
     [Required]
     [DataType(DataType.Text)]
-    public string FileName { get; set; } = null!;
-
-    [Column("display_name")]
-    [Required]
-    [StringLength(50)]
-    [DataType(DataType.Text)]
-    public string DisplayName { get; set; } = null!;
-
-    [NotMapped] public FileInfo Metadata { get; set; } = null!;
+    public string Path { get; set; } = null!;
 
     [Column("fk_carousel_item")]
     [ForeignKey(nameof(CarouselItemEntity))]
