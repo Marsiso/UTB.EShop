@@ -1,4 +1,9 @@
-﻿@inherits LayoutComponentBase
+﻿@using System.ComponentModel.DataAnnotations
+@using Microsoft.EntityFrameworkCore
+@using UTB.EShop.Application.DataTransferObjects.Identity
+@inherits LayoutComponentBase
+@inject HttpClient HttpClient
+@inject IConfiguration Configuration
 
 <!-- Navbar Top Image -->
 <img src="img/navbar.jpg" class="object-fit-cover cover-image" alt="navbar top image">
@@ -35,6 +40,48 @@
             <li><h6 class="dropdown-header">Products</h6></li>
             <li><a class="dropdown-item" href="#">Select</a></li>
             <li><a class="dropdown-item" href="#">Create</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" href="#" id="navbar-dropdown-signin" data-bs-toggle="dropdown" aria-expanded="false">SignIn</a>
+          <ul class="dropdown-menu" aria-labelledby="navbar-dropdown-signin">
+            <EditForm Model="NewUser" OnValidSubmit="OnValidSubmitSignInUserAsync" OnInvalidSubmit="OnInvalidSubmitSignInUserAsync">
+              <DataAnnotationsValidator></DataAnnotationsValidator>
+              <ValidationSummary></ValidationSummary>
+              <li><h6 class="dropdown-header">@@Firstname</h6></li>
+              <InputText @bind-Value="NewUser.FirstName"></InputText>
+              <li><h6 class="dropdown-header">@@Lastname</h6></li>
+              <InputText @bind-Value="NewUser.LastName"></InputText>
+              <li><h6 class="dropdown-header">@@Username</h6></li>
+              <InputText @bind-Value="NewUser.UserName"></InputText>
+              <li><h6 class="dropdown-header">@@Password</h6></li>
+              <InputText @bind-Value="NewUser.Password"></InputText>
+              <li><h6 class="dropdown-header">@@Email</h6></li>
+              <InputText @bind-Value="NewUser.Email"></InputText>
+              <li><h6 class="dropdown-header">@@Phonenumber</h6></li>
+              <InputText @bind-Value="NewUser.PhoneNumber"></InputText>
+              <li><hr class="dropdown-divider"></li>
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-light">Signin</button>
+              </div>
+            </EditForm>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" href="#" id="navbar-dropdown-login" data-bs-toggle="dropdown" aria-expanded="false">Login</a>
+          <ul class="dropdown-menu" aria-labelledby="navbar-dropdown-login">
+            <EditForm Model="User" OnValidSubmit="OnValidSubmitLoginUserAsync" OnInvalidSubmit="OnInvalidSubmitLoginUserAsync">
+              <DataAnnotationsValidator></DataAnnotationsValidator>
+              <ValidationSummary></ValidationSummary>
+              <li><h6 class="dropdown-header">@@Username</h6></li>
+              <InputText @bind-Value="User.UserName"></InputText>
+              <li><h6 class="dropdown-header">@@Password</h6></li>
+              <InputText @bind-Value="User.Password"></InputText>
+              <li><hr class="dropdown-divider"></li>
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-light">Login</button>
+              </div>
+            </EditForm>
           </ul>
         </li>
       </ul>
@@ -77,4 +124,35 @@
       background-size: cover;
   }
 </style>
+
+@code {
+  UserForAuthenticationDto User { get; set; } = new();
+  UserForRegistrationDto NewUser { get; set; } = new();
+
+  async Task OnValidSubmitLoginUserAsync()
+  {
+    throw new NotImplementedException();
+  }
+  
+  async Task OnInvalidSubmitLoginUserAsync()
+  {
+    throw new NotImplementedException();
+  }
+
+  async Task SigninUserAsync()
+  {
+    throw new NotImplementedException();
+  }
+
+  async Task OnValidSubmitSignInUserAsync()
+  {
+    throw new NotImplementedException();
+  }
+  
+  async Task OnInvalidSubmitSignInUserAsync()
+  {
+    throw new NotImplementedException();
+  }
+
+}
 
