@@ -29,7 +29,11 @@ public sealed class CarouselItemEntity : AuditableEntity, IDataEntity
     [StringLength(50)]
     [DataType(DataType.Text)]
     public string? ImageCaptionText { get; set; }
+    
+    [Column("fk_image_file")]
+    [ForeignKey(nameof(ImageFileEntity))]
+    public int ImageFileId { get; set; }
 
     [NotMapped]
-    public ImageFileEntity Image { get; set; } = null!;
+    public ImageFileEntity? Image { get; set; }
 }

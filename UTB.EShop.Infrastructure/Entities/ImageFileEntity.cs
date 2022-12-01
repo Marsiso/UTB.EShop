@@ -17,9 +17,5 @@ public sealed class ImageFileEntity : IDataEntity
     [DataType(DataType.Text)]
     public string Path { get; set; } = null!;
 
-    [Column("fk_carousel_item")]
-    [ForeignKey(nameof(CarouselItemEntity))]
-    public  int CarouselItemId { get; set; }
-
     [NotMapped] public CarouselItemEntity CarouselItemEntity { get; set; } = null!;
 }

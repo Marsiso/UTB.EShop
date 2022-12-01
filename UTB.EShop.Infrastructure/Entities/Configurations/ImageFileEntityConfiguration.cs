@@ -16,20 +16,17 @@ public sealed class ImageFileEntityConfiguration : IEntityTypeConfiguration<Imag
             new()
             {
                 Id = 1,
-                Path = Path.Combine(storagePath, "carousel_image_africa_giraffe.jpg"),
-                CarouselItemId = 1
+                Path = Path.Combine(storagePath, "carousel_image_africa_giraffe.jpg")
             },
             new()
             {
                 Id = 2,
-                Path = Path.Combine(storagePath, "carousel_image_skyscraper.jpg"),
-                CarouselItemId = 2
+                Path = Path.Combine(storagePath, "carousel_image_skyscraper.jpg")
             },
             new()
             {
                 Id = 3,
-                Path= Path.Combine(storagePath, "carousel_image_waterfall.jpg"),
-                CarouselItemId = 3
+                Path= Path.Combine(storagePath, "carousel_image_waterfall.jpg")
             }
         });
     }

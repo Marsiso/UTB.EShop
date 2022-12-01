@@ -20,7 +20,8 @@ public sealed class CarouselItemEntityConfiguration : IEntityTypeConfiguration<C
                 ModifiedBy = "Marek Olsak",
                 ImageAlt = "image",
                 ImageCaptionHeader = "Quote",
-                ImageCaptionText = "Even Sun have sunny days ..."
+                ImageCaptionText = "Even Sun have sunny days ...",
+                ImageFileId = 1
             },
             new()
             {
@@ -31,7 +32,8 @@ public sealed class CarouselItemEntityConfiguration : IEntityTypeConfiguration<C
                 ModifiedBy = "Marek Olsak",
                 ImageAlt = "image",
                 ImageCaptionHeader = "Quote",
-                ImageCaptionText = "Water is wet ..."
+                ImageCaptionText = "Water is wet ...",
+                ImageFileId = 2
             },
             new()
             {
@@ -42,7 +44,8 @@ public sealed class CarouselItemEntityConfiguration : IEntityTypeConfiguration<C
                 ModifiedBy = "Alexandr Cizek",
                 ImageAlt = "image",
                 ImageCaptionHeader = "Quote",
-                ImageCaptionText = "Gold is shiny ..."
+                ImageCaptionText = "Gold is shiny ...",
+                ImageFileId = 3
             }
         });
     }
