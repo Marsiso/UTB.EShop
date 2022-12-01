@@ -79,8 +79,8 @@ public class FileUploadController : ControllerBase
         try
         {
             var path = Path.Combine(_hostEnvironment.ContentRootPath,
-                "Development", 
-                "Uploads",
+                "wwwroot", 
+                "images",
                 $"{trustedFileNameForFileStorage}{fileExtension}");
         
             // Create file at path

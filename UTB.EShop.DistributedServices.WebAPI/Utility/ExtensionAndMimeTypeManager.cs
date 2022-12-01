@@ -34,7 +34,7 @@ public static class ExtensionAndMimoTypeManager
     public static bool TryGetDefaultExtension(this string mimeType, out string? extension) => 
         MimoTypes.TryGetValue(mimeType, out extension);
 
-    public static bool GetMimeTypeFromExtension(this string extension, out string? mimeType) =>
+    public static bool TryGetMimeTypeFromExtension(this string extension, out string? mimeType) =>
         Extensions.TryGetValue(extension, out mimeType);
 
     // aspnetcore/src/Middleware/StaticFiles/src/FileExtensionContentTypeProvider.cs is an viable option

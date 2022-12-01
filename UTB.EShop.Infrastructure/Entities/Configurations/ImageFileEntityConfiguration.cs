@@ -9,7 +9,7 @@ public sealed class ImageFileEntityConfiguration : IEntityTypeConfiguration<Imag
     {
         var directory = new DirectoryInfo(Directory.GetCurrentDirectory());
         while (directory is not null && !directory.GetFiles("*.sln").Any()) directory = directory.Parent;
-        var storagePath = Path.Combine(directory.FullName, "UTB.EShop.DistributedServices.WebAPI", "Development", "Uploads");
+        var storagePath = Path.Combine(directory.FullName, "UTB.EShop.DistributedServices.WebAPI", "wwwroot", "images");
 
         builder.HasData(new List<ImageFileEntity>
         {
